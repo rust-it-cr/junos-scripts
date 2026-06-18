@@ -1,4 +1,4 @@
-⛏️ ** Extract a hierarchical configuration from an RSI**
+⛏️ **Extract a hierarchical configuration from an RSI**
 
 This script takes an RSI file and a resulting file name and sends all configuration to the resulting file.
 
