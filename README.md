@@ -8,6 +8,7 @@ This repository hosts scripts I work on from time to time for different Junos ta
 
 So far I have the following scripts:
 - **Configuration extraction**: a script that extracts the configuration from an RSI file. Simple and quite useful.
+- **Commands extraction**: a script that extracts useful commands for troubleshooting and diagnostics from an RSI file. It will eventually support multiple Junos platforms.
 
 If you have any ideas for any scripts just hit me up and I'll try to create them. Mainly scripts for troubleshooting and monitoring though.
 
