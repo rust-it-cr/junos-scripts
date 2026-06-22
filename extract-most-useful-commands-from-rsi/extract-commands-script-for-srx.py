@@ -17,24 +17,28 @@ DATA = [
 
 
 def main():
-    text, type = read_rsi()
+    try:
+        text, type = read_rsi()
 
-    show_commands = []
+        show_commands = []
 
-    if type == "standalone":
-        show_commands.append([f"===> STANDALONE <===\n"])
-        for item in DATA:
-            show_commands.append(extract_commands(text, item))
-    elif type == "cluster":
-        number = 0
-        for node in text:
-            show_commands.append([f"===> NODE{number} <===\n"])
-            number += 1
+        if type == "standalone":
+            show_commands.append([f"===> STANDALONE <===\n"])
             for item in DATA:
-                show_commands.append(extract_commands(node, item))
+                show_commands.append(extract_commands(text, item))
+        elif type == "cluster":
+            number = 0
+            for node in text:
+                show_commands.append([f"===> NODE{number} <===\n"])
+                number += 1
+                for item in DATA:
+                    show_commands.append(extract_commands(node, item))
 
-    result = create_file(show_commands)
-    sys.exit(result)
+        result = create_file(show_commands)
+        sys.exit(result)
+        
+    except Exception as e:
+        sys.exit("Failure: {e}. Please try again or report this to the creator of this script.")
 
 
 def read_rsi():
