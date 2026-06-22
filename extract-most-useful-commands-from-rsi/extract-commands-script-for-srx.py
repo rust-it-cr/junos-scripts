@@ -1,19 +1,14 @@
+import csv
 import pathlib
 import sys
 
 
-DATA = [
-    {'first': 'show system uptime', 'last': 'show pfe statistics error'},
-    {'first': 'show chassis routing-engine', 'last': 'show chassis fpc detail'},
-    {'first': 'show system storage', 'last': 'show system virtual-memory'},
-    {'first': 'show route summary', 'last': 'file list detail'},
-    {'first': 'show chassis cluster status', 'last': 'request pfe execute command "show usp ha vsd"'},
-    {'first': 'request pfe execute command "show version"', 'last': 'request pfe execute command "show threads"'},
-    {'first': 'request pfe execute command "show pfe statistics traffic"', 'last': 'request pfe execute command "show fwdd statistics result"'},
-    {'first': 'request pfe execute command "show arena"', 'last': 'request pfe execute command "show services mum"'},
-    {'first': 'show security monitoring fpc', 'last': 'show services advanced-anti-malware'},
-    {'first': 'show security flow statistics', 'last': 'request pfe execute command "show usp interface all"'}
-]
+DATA = []
+
+with open("srx-commands.csv") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        DATA.append(row)
 
 
 def main():
@@ -29,7 +24,7 @@ def main():
         elif type == "cluster":
             number = 0
             for node in text:
-                show_commands.append([f"===> NODE{number} <===\n"])
+                show_commands.append([f"===> NODE {number} <===\n"])
                 number += 1
                 for item in DATA:
                     show_commands.append(extract_commands(node, item))

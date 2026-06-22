@@ -1,0 +1,30 @@
+first,last
+show system uptime no-forwarding,show version detail no-forwarding
+show version detail no-forwarding,show system core-dumps no-forwarding
+show chassis hardware detail no-forwarding,show system processes extensive no-forwarding
+show system license,show pfe statistics error
+show system core-dumps no-forwarding,show chassis alarms no-forwarding
+show system storage no-forwarding,show system virtual-memory no-forwarding
+show system snapshot media internal,show system firmware no-forwarding
+show chassis alarms no-forwarding,show chassis hardware detail no-forwarding
+show chassis routing-engine no-forwarding,show chassis environment no-forwarding
+show system processes extensive no-forwarding,show system license
+show chassis environment no-forwarding,show chassis firmware no-forwarding
+show security monitoring fpc 0,show system snapshot media internal
+show chassis firmware no-forwarding,show chassis fpc detail
+show system firmware no-forwarding,show services advanced-anti-malware
+show arp no-resolve,show system configuration database usage
+show route summary,show system commit
+show route brief,show security nat source summary no-forwarding
+show system commit,show arp no-resolve
+show system configuration database usage,file list detail /var/rundb/
+show chassis cluster status,show chassis cluster statistics
+show chassis cluster statistics,show chassis cluster interfaces
+show chassis cluster interfaces,show chassis cluster information detail no-forwarding
+show chassis cluster information detail no-forwarding,request pfe execute command "show usp ha vsd" target
+show security flow statistics,show security flow status
+show security flow status,show security flow session summary no-forwarding
+show security flow session summary no-forwarding,request pfe execute command "show usp interface all" target
+request pfe execute command "show version" target,request pfe execute command "show threads" target
+request pfe execute command "show arena" target,request pfe execute command "show memory" target
+request pfe execute command "show memory" target,request pfe execute command "show services mum" target
