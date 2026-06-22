@@ -8,6 +8,7 @@ def main(): # USAGE ==> python3 <source-path-for-script> <source-path-for-rsi-fi
         config = read_rsi(file)
         config = purge_config(config)
         result = create_file(config)
+        sys.exit(result)
     except Exception as e:
         sys.exit(f"Failure: {e}. Please try again.")
 
@@ -49,6 +50,8 @@ def create_file(configuration):
     with open(f"{path}", "w") as file:
         for line in configuration:
             file.write(f"{line}\n")
+
+    return f"{path} has been successfully generated!"
 
 
 if __name__ == "__main__":
