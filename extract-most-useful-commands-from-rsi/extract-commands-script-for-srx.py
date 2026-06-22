@@ -36,9 +36,9 @@ def main():
 
         result = create_file(show_commands)
         sys.exit(result)
-        
+
     except Exception as e:
-        sys.exit("Failure: {e}. Please try again or report this to the creator of this script.")
+        sys.exit(f"Failure: {e}. Please try again or report this to the creator of this script.")
 
 
 def read_rsi():
