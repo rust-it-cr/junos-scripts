@@ -11,7 +11,7 @@ python[3] <source-path-for-the-script> <source-path-for-the-rsi-file> <resulting
 For example (doing this on my Windows machine):
 
 ```
-python3 "C:\Users\user\Documents\Coding\Python\script-to-extract-config-from-rsi\extract-config-script.py" "C:\Users\iser\Documents\Coding\Python\script-to-extract-config-from-rsi\test-rsi.txt" "config-file.txt"
+python3 "C:\Users\user\Documents\Coding\Python\script-to-extract-config-from-rsi\extract-config-script.py" "C:\Users\user\Documents\Coding\Python\script-to-extract-config-from-rsi\test-rsi.txt" "config-file.txt"
 ```
 
-The resulting file will always be created in the Downloads directory regardless of OS.
+The resulting file will always be created in the Downloads directory regardless of the OS being used.
