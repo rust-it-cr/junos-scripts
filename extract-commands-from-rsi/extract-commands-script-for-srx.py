@@ -1,14 +1,39 @@
-import csv
 import pathlib
+import re
 import sys
 
 
-DATA = []
-
-with open("srx-commands.csv") as file:
-    reader = csv.DictReader(file)
-    for row in reader:
-        DATA.append(row)
+DATA = [
+    'show system uptime no-forwarding',
+    'show version detail no-forwarding',
+    'show chassis hardware detail no-forwarding',
+    'show system license',
+    'show system core-dumps no-forwarding',
+    'show system storage no-forwarding',
+    'show system snapshot media internal',
+    'show chassis alarms no-forwarding',
+    'show chassis routing-engine no-forwarding',
+    'show system processes extensive no-forwarding',
+    'show chassis environment no-forwarding',
+    'show security monitoring fpc 0',
+    'show chassis firmware no-forwarding',
+    'show system firmware no-forwarding',
+    'show arp no-resolve',
+    'show route summary',
+    'show route brief',
+    'show system commit',
+    'show system configuration database usage',
+    'show chassis cluster status',
+    'show chassis cluster statistics',
+    'show chassis cluster interfaces',
+    'show chassis cluster information detail no-forwarding',
+    'show security flow statistics',
+    'show security flow status',
+    'show security flow session summary no-forwarding',
+    'request pfe execute command "show version" target',
+    'request pfe execute command "show arena" target',
+    'request pfe execute command "show memory" target'
+]
 
 
 def main():
@@ -62,17 +87,19 @@ def read_rsi():
         return lines, "standalone"
 
 
-def extract_commands(lines, commands):
+def extract_commands(lines, command):
     switch = False
+    next_command = "^.+@.+> .+$"
     tmp = []
 
     for line in lines:
-        if commands["first"] in line:
+        if command in line:
             switch = True
-        if switch and commands["last"] not in line:
             tmp.append(line.strip())
-        if commands["last"] in line:
-            break
+        elif switch and not re.match(next_command, line):
+            tmp.append(line.strip())
+        elif re.match(next_command, line):
+            switch = False
 
     return tmp
 
