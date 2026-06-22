@@ -49,10 +49,11 @@ def main():
         elif type == "cluster":
             number = 0
             for node in text:
-                show_commands.append([f"===> NODE {number} <===\n"])
-                number += 1
+                show_commands.append([f"=== BEGINNING - NODE{number} ===\n"])
                 for item in DATA:
                     show_commands.append(extract_commands(node, item))
+                show_commands.append([f"=== ENDING - NODE{number} ===\n"])
+                number += 1
 
         result = create_file(show_commands)
         sys.exit(result)
