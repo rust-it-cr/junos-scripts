@@ -15,7 +15,7 @@ DATA = [
     'show chassis routing-engine no-forwarding',
     'show system processes extensive no-forwarding',
     'show chassis environment no-forwarding',
-    'show security monitoring fpc 0',
+    'show security monitoring fpc',
     'show chassis firmware no-forwarding',
     'show system firmware no-forwarding',
     'show arp no-resolve',
@@ -49,10 +49,10 @@ def main():
         elif type == "cluster":
             number = 0
             for node in text:
-                show_commands.append([f"=== BEGINNING - NODE{number} ===\n"])
+                show_commands.append([f"===> BEGINNING - NODE{number} <===\n"])
                 for item in DATA:
                     show_commands.append(extract_commands(node, item))
-                show_commands.append([f"=== ENDING - NODE{number} ===\n"])
+                show_commands.append([f"===> ENDING - NODE{number} <===\n"])
                 number += 1
 
         result = create_file(show_commands)
