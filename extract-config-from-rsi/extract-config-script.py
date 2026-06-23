@@ -16,16 +16,18 @@ def read_rsi(file):
     with open(file, "r") as open_file:
         lines = open_file.readlines()
 
-        inside_range = False
-        config_lines = []
+    inside_range = False
+    start = "show configuration | except SECRET-DATA"
+    ending = "show interfaces extensive no-forwarding"
+    config_lines = []
 
-        for line in lines:
-            if "show configuration | except SECRET-DATA" in line:
-                inside_range = True
-            if inside_range:
-                config_lines.append(line.strip())
-            if "show interfaces extensive no-forwarding" in line:
-                break
+    for line in lines:
+        if start in line:
+            inside_range = True
+        if inside_range:
+            config_lines.append(line.strip())
+        if ending in line:
+            break
 
     return config_lines
 
