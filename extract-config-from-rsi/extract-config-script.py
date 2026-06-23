@@ -1,47 +1,45 @@
 import pathlib
+import re
 import sys
 
 
-def main(): # USAGE ==> python3 <source-path-for-script> <source-path-for-rsi-file> <resulting-file-name> | it will save the resulting file to the Downloads folder
+def main():
     try:
         file = sys.argv[1]
-        config = read_rsi(file)
-        config = purge_config(config)
+        rsi_lines = read_rsi(file)
+        config = purge_config(rsi_lines)
         result = create_file(config)
         sys.exit(result)
     except Exception as e:
         sys.exit(f"Failure: {e}. Please try again.")
 
+
 def read_rsi(file):
     with open(file, "r") as open_file:
         lines = open_file.readlines()
 
-    inside_range = False
-    start = "show configuration | except SECRET-DATA"
-    ending = "show interfaces extensive no-forwarding"
-    config_lines = []
-
-    for line in lines:
-        if start in line:
-            inside_range = True
-        if inside_range:
-            config_lines.append(line.strip())
-        if ending in line:
-            break
-
-    return config_lines
+    return lines
 
 
 def purge_config(configuration):
+    switch = False
+    config_number = 0
+    config_start = "show configuration | except SECRET-DATA"
+    next_command = "^.+@.+> .+$"
     tmp = []
-    
-    for element in configuration:
-        if "show configuration | except SECRET-DATA" in element or "show interfaces extensive no-forwarding" in element or "Last commit" in element:
+
+    for line in configuration:
+        if config_start in line:
+            switch = True
+            config_number += 1
+        elif "Last commit" in line:
             pass
-        elif not element:
-            pass
-        else:
-            tmp.append(element)
+        elif switch and not re.match(next_command, line):
+            tmp.append(line.strip())
+        elif re.match(next_command, line):
+            switch = False
+        elif config_number == 1:
+            break
 
     return tmp
 
@@ -53,8 +51,8 @@ def create_file(configuration):
         for line in configuration:
             file.write(f"{line}\n")
 
-    return f"{path} has been successfully generated!"
+    return f"{path} has been successfully created!"
 
 
 if __name__ == "__main__":
-    main() 
+    main()
