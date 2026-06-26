@@ -34,6 +34,8 @@ def purge_config(configuration):
             config_number += 1
         elif "Last commit" in line:
             pass
+        elif "tnpdump" in line:
+            switch = False
         elif switch and not re.match(next_command, line):
             tmp.append(line.strip())
         elif re.match(next_command, line):
