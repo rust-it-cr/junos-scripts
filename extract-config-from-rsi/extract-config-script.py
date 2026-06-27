@@ -25,7 +25,7 @@ def purge_config(configuration):
     switch = False
     config_number = 0
     config_start = "show configuration | except SECRET-DATA"
-    next_command = "^.+@?.+> .+$"
+    next_command = "^.+@.+> .+$"
     tmp = []
 
     for line in configuration:
