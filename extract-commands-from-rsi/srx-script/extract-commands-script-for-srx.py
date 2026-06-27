@@ -3,37 +3,11 @@ import re
 import sys
 
 
-DATA = [
-    'show system uptime no-forwarding',
-    'show version detail no-forwarding',
-    'show chassis hardware detail no-forwarding',
-    'show system license',
-    'show system core-dumps no-forwarding',
-    'show system storage no-forwarding',
-    'show system snapshot media internal',
-    'show chassis alarms no-forwarding',
-    'show chassis routing-engine no-forwarding',
-    'show system processes extensive no-forwarding',
-    'show chassis environment no-forwarding',
-    'show security monitoring fpc',
-    'show chassis firmware no-forwarding',
-    'show system firmware no-forwarding',
-    'show arp no-resolve',
-    'show route summary',
-    'show route brief',
-    'show system commit',
-    'show system configuration database usage',
-    'show chassis cluster status',
-    'show chassis cluster statistics',
-    'show chassis cluster interfaces',
-    'show chassis cluster information detail no-forwarding',
-    'show security flow statistics',
-    'show security flow status',
-    'show security flow session summary no-forwarding',
-    'request pfe execute command "show version" target',
-    'request pfe execute command "show arena" target',
-    'request pfe execute command "show memory" target'
-]
+DATA = []
+
+with open("srx-commands.csv") as file:
+    for line in file:
+        DATA.append(line.strip())
 
 
 def main():
@@ -43,7 +17,6 @@ def main():
         show_commands = []
 
         if type == "standalone":
-            show_commands.append([f"===> STANDALONE <===\n"])
             for item in DATA:
                 show_commands.append(extract_commands(text, item))
         elif type == "cluster":
@@ -71,26 +44,19 @@ def read_rsi():
 
         lines1 = lines[:half]
         lines2 = lines[half:]
-    
-        second_rsi_half_health = False
 
         for line in lines2:
             if "show version detail no-forwarding" in line:
-                second_rsi_half_health = True
-                break
+                return [lines1, lines2], "cluster"
             else:
                 continue
 
-        if second_rsi_half_health:
-            return [lines1, lines2], "cluster"
-    
-    else:
-        return lines, "standalone"
+    return lines, "standalone"
 
 
 def extract_commands(lines, command):
     switch = False
-    next_command = "^.+@.+> .+$"
+    next_command = "^.+@?.+> .+$"
     tmp = []
 
     for line in lines:

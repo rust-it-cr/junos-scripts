@@ -1,0 +1,29 @@
+show system uptime
+show version detail
+show chassis hardware detail
+show system license
+show system core-dumps
+show system storage
+show system snapshot media internal
+show chassis alarms
+show chassis routing-engine
+show system processes extensive
+show chassis environment
+show security monitoring fpc
+show chassis firmware
+show system firmware
+show system commit
+show system configuration database usage
+show chassis cluster status
+show chassis cluster statistics
+show chassis cluster interfaces
+show chassis cluster information detail
+show security flow statistics
+show security flow status
+show security flow session summary
+request pfe execute command "show version" target
+request pfe execute command "show arena" target
+request pfe execute command "show memory" target
+show arp no-resolve
+show route summary
+show route brief
