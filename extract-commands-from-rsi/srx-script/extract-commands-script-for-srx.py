@@ -5,7 +5,7 @@ import sys
 
 DATA = []
 
-with open("srx-commands.csv") as file:
+with open("srx-commands.txt") as file:
     for line in file:
         DATA.append(line.strip())
 
